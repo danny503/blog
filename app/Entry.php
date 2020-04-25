@@ -18,7 +18,7 @@ class Entry extends Model
         $this->attributes['title'] = $value;
         $this->attributes['slug'] = Str::slug($value);
     }
-        
+    
     public function getUrl(){
         return url("entries/$this->slug-$this->id");
     }
