@@ -24,9 +24,11 @@
                     @endif
                     <p>Publiched entries</p>
                     <ul>
-                        <li>
-                            <a href="{{url('entries/'.$entry->id)}}">{{$entry->title}}</a>
-                        </li>
+                        @foreach ($entries as $entry)
+                            <li>
+                                <a href="{{$entry->getUrl()}}">{{$entry->title}}</a>                                
+                            </li>
+                        @endforeach                        
                     </ul>
                 </div>
             </div>

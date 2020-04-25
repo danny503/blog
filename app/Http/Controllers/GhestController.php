@@ -15,7 +15,9 @@ class GhestController extends Controller
         ->paginate(10);
         return view('welcome')->with(compact('entries'));        
     }
-    public function show(Entry $entry){
-        return view('entries.show', compact('entry'));
+    public function show(Entry $entryBySlug){
+        return view('entries.show', [
+            'entry' => $entryBySlug
+        ]);
     }
 }
