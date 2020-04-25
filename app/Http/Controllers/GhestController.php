@@ -9,7 +9,13 @@ class GhestController extends Controller
 {
     public function index(){
         //dd('GuestController');
-        $entries = Entry::paginate(10);
-        return view('welcome')->with(compact('entries'));
+        $entries = Entry::with('user')
+        ->orderByDesc('created_at')
+        ->orderByDesc('id')
+        ->paginate(10);
+        return view('welcome')->with(compact('entries'));        
+    }
+    public function show(Entry $entry){
+        return view('entries.show', compact('entry'));
     }
 }
