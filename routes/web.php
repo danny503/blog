@@ -9,6 +9,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/entries/create', 'EntryController@create');
+Route::get('/entries/ver', 'EntryController@verComponent');
 Route::post('/entries', 'EntryController@store');
 Route::get('/entries/{entryBySlug}', 'GhestController@show');
 Route::get('/entries/{entry}/edit', 'EntryController@edit');

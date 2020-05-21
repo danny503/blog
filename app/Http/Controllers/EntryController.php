@@ -16,7 +16,6 @@ class EntryController extends Controller
     }
     public function store(Request $request){
         //dd($request->all());
-
         //Validaciones
        $validateData = $request->validate([
             'title' => 'required|min:7|max:255|unique:entries',
@@ -27,11 +26,11 @@ class EntryController extends Controller
         $entry->title = $validateData['title'];
         $entry->content = $validateData['content'];
         $entry->user_id = auth()->id();
-        $entry->save();//INSERT 
+        $entry->save();//INSERT
 
         $status = 'Tu entrada ha sido publicada exitosamente';
         return back()->with(compact('status'));
-        
+
     }
     public function edit(Entry $entry){
         $this->authorize('update',$entry);
@@ -41,7 +40,7 @@ class EntryController extends Controller
     public function update(Request $request, Entry $entry){
         //Validaciones
         $this->authorize('update',$entry);
-        
+
        $validateData = $request->validate([
             'title' => 'required|min:7|max:255|unique:entries,id,'.$entry->id,
             'content' => 'required|min:25|max:3000'
@@ -50,11 +49,16 @@ class EntryController extends Controller
         //Permitir editar solo al autor
         $entry->title = $validateData['title'];
         $entry->content = $validateData['content'];
-        $entry->save();//INSERT 
+        $entry->save();//INSERT
 
         $status = 'Tu entrada ha sido actualizada exitosamente';
         return back()->with(compact('status'));
-        
+
+    }
+    public function verComponent(Request $request)
+    {
+        $entry = Entry::all();
+      return $entry;
     }
 }
 
